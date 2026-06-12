@@ -1,0 +1,12 @@
+# Cheaplane — minimal LiteLLM proxy config.
+#   1) copy to litellm.yaml   2) export DEEPSEEK_API_KEY=...   3) litellm --config litellm.yaml
+# Serves http://localhost:4000. The model_name "deepseek" matches Cheaplane's default
+# alias, so delegate("...", "deepseek") works out of the box.
+model_list:
+  - model_name: deepseek
+    litellm_params:
+      model: deepseek/deepseek-chat        # any provider/model LiteLLM supports
+      api_key: os.environ/DEEPSEEK_API_KEY
+
+# Add more cheap models the same way, then point Cheaplane's aliases at them via the
+# DELEGATE_MODEL_MAP env var. Provider list: https://docs.litellm.ai/docs/providers

@@ -1,0 +1,12 @@
+[project]
+name = "cheaplane"
+version = "0.2.0"
+description = "Offload grunt work from your subscription LLM to cheap models via MCP — auto-routing, a savings ledger, and billing isolation."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["mcp>=1.2"]
+
+# This repo is a "run the script" project, not a packaged library — make uv sync
+# install dependencies only, without trying to build the project itself.
+[tool.uv]
+package = false

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "delegate": {
+      "command": "uv",
+      "args": ["run", "--directory", "/ABSOLUTE/PATH/TO/cheaplane", "python", "server.py"]
+    }
+  }
+}
