@@ -1,7 +1,7 @@
 .venv/
 __pycache__/
 *.pyc
-# 本地接入配置(含本机绝对路径),开源只提交 .mcp.json.example
+# Local wiring (machine-absolute paths) — commit only .mcp.json.example
 .mcp.json
 # your real proxy config may hold API keys; only litellm.yaml.example is shipped
 litellm.yaml

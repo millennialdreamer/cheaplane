@@ -90,7 +90,7 @@ def _pick_model(task: str) -> str:
         return "deepseek"
     if len(task) > 12000:
         return "kimi"
-    han = sum(1 for c in task if "一" <= c <= "鿿")
+    han = sum(1 for c in task if "\u4e00" <= c <= "\u9fff")
     if han > max(20, len(task) * 0.15):
         return "qwen"
     if any(s in t for s in ("step by step", "multi-step", "pipeline", "workflow",
@@ -223,7 +223,7 @@ def savings() -> str:
             f"  delegated calls : {tot['n']}\n"
             f"  tokens offloaded: ~{tot['in']:,} in / ~{tot['out']:,} out\n"
             f"  premium cost avoided (Opus list): ~${prem:,.2f}\n"
-            f"  actually spent (DeepSeek-class) : ~${cheap:,.2f}  (≈{mult:.0f}× cheaper)\n"
+            f"  actually spent (DeepSeek-class) : ~${cheap:,.2f}  (≈{mult:.0f}× cheaper, in+out blended)\n"
             f"  last 7 days     : {week['n']} calls, ~${week_prem:,.2f} avoided\n"
             f"(estimates from logged token counts at public list prices; your main thread\n"
             f" runs on subscription quota — the real win is the quota you kept)")

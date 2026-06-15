@@ -71,7 +71,7 @@ The grunt work is the *easy* part — paying premium rates for it is pure waste.
 | Claude Opus *(API, for reference)* | $5.00 | **$25.00** | the judgment work you keep |
 | DeepSeek V4 Flash | $0.14 | **$0.28** | code / formatting |
 | Kimi K2 | $0.60–0.95 | $2.50–4.00 | long docs (very large context) |
-| Qwen | ~$0.11 | ~$0.66 | Chinese copy |
+| Qwen | $0.05–0.40 | $0.20–1.20 | Chinese copy |
 
 That's an output token costing **~$25 on Opus vs ~$0.28 on DeepSeek — about 90× more for work that doesn't need the smarts.** You're on a *subscription*, so you don't pay that $25 directly — your main thread spends *quota*, not dollars. That's the whole point: every routine task you offload is premium quota you keep for the hard problems. *(Summarizing a 40-page doc on DeepSeek Flash runs ~$0.005 — your quota never even notices.)*
 
@@ -164,7 +164,7 @@ Your agent now has `delegate(task)` — **routing is automatic**; override only 
 ```text
 delegate("convert this JSON to a TypeScript interface: …")      #  auto → deepseek (code)
 delegate("summarize this 40-page contract: …")                  #  auto → kimi (very long input)
-delegate("把这段产品介绍改写成小红书风格 …")                        #  auto → qwen (Chinese copy)
+delegate("…Chinese text in the task auto-routes here…")        #  auto → qwen (Chinese copy)
 delegate("translate these UI strings to Japanese", "flash")     #  explicit alias still wins
 ```
 
@@ -209,7 +209,7 @@ Cheaplane savings — all time
   delegated calls : 184
   tokens offloaded: ~412,300 in / ~365,800 out
   premium cost avoided (Opus list): ~$11.21
-  actually spent (DeepSeek-class) : ~$0.16  (≈70× cheaper)
+  actually spent (DeepSeek-class) : ~$0.16  (≈70× cheaper, in+out blended)
   last 7 days     : 31 calls, ~$2.04 avoided
 ```
 

@@ -5,7 +5,7 @@
 model_list:
   - model_name: deepseek
     litellm_params:
-      model: deepseek/deepseek-chat        # any provider/model LiteLLM supports
+      model: deepseek/deepseek-chat        # V4 Flash alias (deprecates 2026-07-24); or any provider/model LiteLLM supports
       api_key: os.environ/DEEPSEEK_API_KEY
 
 # Add more cheap models the same way, then point Cheaplane's aliases at them via the
