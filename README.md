@@ -95,7 +95,7 @@ The Cheaplane process **never imports your subscription provider's SDK, never re
 **Fastest path** — Claude Code, one script:
 
 ```bash
-git clone https://github.com/arggjarvs/cheaplane && cd cheaplane
+git clone https://github.com/millennialdreamer/cheaplane && cd cheaplane
 cp litellm.yaml.example litellm.yaml          # then: export DEEPSEEK_API_KEY=sk-...
 litellm --config litellm.yaml &               # start the cheap-model proxy on :4000
 bash setup.sh                                 # deps + register MCP + reminder hook + verify
@@ -131,7 +131,7 @@ That `model_name: deepseek` lines up with Cheaplane's default alias, so it works
 **2. Install Cheaplane:**
 
 ```bash
-git clone https://github.com/arggjarvs/cheaplane && cd cheaplane
+git clone https://github.com/millennialdreamer/cheaplane && cd cheaplane
 uv sync     # or:  python -m venv .venv && .venv/bin/pip install mcp
 ```
 
