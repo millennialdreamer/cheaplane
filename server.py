@@ -21,7 +21,7 @@ without losing main-thread quality.
    (never the task content) to ~/.cheaplane/usage.jsonl, so the `savings` tool
    can show what you've kept off your premium quota. Opt out: DELEGATE_NO_LOG=1.
 
-Dependencies: just the mcp SDK (FastMCP); everything else is the Python stdlib.
+Dependencies: just the mcp SDK (1.x or 2.x); everything else is the Python stdlib.
 """
 import os
 import json
@@ -29,7 +29,11 @@ import time
 import urllib.request
 import urllib.error
 
-from mcp.server.fastmcp import FastMCP
+try:
+    # mcp >= 2.0 renamed FastMCP to MCPServer; the constructor, @tool() and run() are unchanged.
+    from mcp.server.mcpserver import MCPServer as _Server
+except ImportError:  # mcp 1.x
+    from mcp.server.fastmcp import FastMCP as _Server
 
 # Upstream = local LiteLLM proxy by default; override via env to target any OpenAI-compatible endpoint
 BASE_URL = os.environ.get("DELEGATE_BASE_URL", "http://localhost:4000")
@@ -119,7 +123,7 @@ def _log(alias: str, real_model: str, usage: dict, task_chars: int, out_chars: i
         pass  # bookkeeping must never break a delegation
 
 
-mcp = FastMCP("delegate")
+mcp = _Server("delegate")
 
 
 @mcp.tool()
@@ -243,5 +247,10 @@ def list_models() -> str:
     return json.dumps(notes, ensure_ascii=False, indent=2)
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Console-script entry point (`cheaplane`), also used by `python server.py`."""
     mcp.run()
+
+
+if __name__ == "__main__":
+    main()

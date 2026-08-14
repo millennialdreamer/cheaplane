@@ -5,3 +5,6 @@ __pycache__/
 .mcp.json
 # your real proxy config may hold API keys; only litellm.yaml.example is shipped
 litellm.yaml
+dist/
+build/
+*.egg-info/

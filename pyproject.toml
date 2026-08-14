@@ -5,8 +5,49 @@ description = "Offload grunt work from your subscription LLM to cheap models via
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = ["mcp>=1.2"]
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  { name = "millennialdreamer", email = "269377871+millennialdreamer@users.noreply.github.com" },
+]
+keywords = ["mcp", "model-context-protocol", "llm", "claude", "claude-code", "litellm", "cost-optimization", "deepseek"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Operating System :: MacOS",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Code Generators",
+  "Topic :: Utilities",
+]
 
-# This repo is a "run the script" project, not a packaged library — make uv sync
-# install dependencies only, without trying to build the project itself.
+[project.urls]
+Homepage = "https://github.com/millennialdreamer/cheaplane"
+Repository = "https://github.com/millennialdreamer/cheaplane"
+Issues = "https://github.com/millennialdreamer/cheaplane/issues"
+
+[project.scripts]
+cheaplane = "cheaplane:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# The repo stays a "clone and run" project — server.py sits at the root so
+# `python server.py` and setup.sh keep working untouched. The wheel ships that
+# same single file as the top-level `cheaplane` module.
+[tool.hatch.build.targets.wheel]
+force-include = { "server.py" = "cheaplane.py" }
+
+[tool.hatch.build.targets.sdist]
+include = ["server.py", "probe.py", "setup.sh", "install-hook.sh", "hooks", "litellm.yaml.example", "README.md", "LICENSE", "SKILL.md"]
+
+# Keep `uv sync` installing dependencies only, without building the project —
+# contributors run the checkout directly rather than an installed copy.
 [tool.uv]
 package = false
