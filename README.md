@@ -6,6 +6,7 @@
 
 > **Keep your premium subscription on the main thread. Offload the grunt work to cheap models — Cheaplane even picks the right one for you. Stop burning premium tokens on boilerplate.**
 
+[![PyPI](https://img.shields.io/pypi/v/cheaplane)](https://pypi.org/project/cheaplane/)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![MCP](https://img.shields.io/badge/MCP-compatible-purple)
@@ -105,6 +106,15 @@ bash setup.sh                                 # deps + register MCP + reminder h
 
 <p align="center"><img src="assets/setup.png" alt="bash setup.sh — installs deps, registers the MCP server with Claude Code, installs the reminder hook, and verifies the chain end-to-end" width="760"></p>
 
+**Prefer a package?** Cheaplane is on PyPI — no clone, no path to hard-code:
+
+```bash
+pip install cheaplane          # or: uvx cheaplane  /  pipx install cheaplane
+claude mcp add delegate cheaplane
+```
+
+You still want the proxy from step 1 below, and the [reminder hook](#make-your-agent-actually-use-it) is worth it — that part needs the repo.
+
 <details>
 <summary><b>Manual setup / what <code>setup.sh</code> does under the hood</b></summary>
 
@@ -128,14 +138,27 @@ litellm --config litellm.yaml        # serves http://localhost:4000
 
 That `model_name: deepseek` lines up with Cheaplane's default alias, so it works out of the box. (`deepseek` is a built-in LiteLLM provider — no `api_base` needed; you'd add one only for a custom or self-hosted endpoint.) Already have an OpenAI-compatible endpoint (LiteLLM, OpenRouter, Ollama, vLLM…)? Skip this and just point `DELEGATE_BASE_URL` at it.
 
-**2. Install Cheaplane:**
+**2. Install Cheaplane** — from PyPI, or from a clone if you also want the reminder hook and `probe.py`:
 
+```bash
+pip install cheaplane        # installs a `cheaplane` command; that's the whole install
+```
 ```bash
 git clone https://github.com/millennialdreamer/cheaplane && cd cheaplane
 uv sync     # or:  python -m venv .venv && .venv/bin/pip install mcp
 ```
 
-**3. Register it with your MCP client** — copy `.mcp.json.example` to `.mcp.json` in the repo root and fix the path (or use `claude mcp add`):
+**3. Register it with your MCP client.** Installed from PyPI — the command is already on your `PATH`:
+
+```json
+{
+  "mcpServers": {
+    "delegate": { "command": "cheaplane" }
+  }
+}
+```
+
+From a clone — copy `.mcp.json.example` to `.mcp.json` in the repo root and fix the path (or use `claude mcp add`):
 
 ```json
 {
