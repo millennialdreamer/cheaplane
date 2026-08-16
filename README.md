@@ -13,6 +13,8 @@
 ![Deps](https://img.shields.io/badge/deps-just%20mcp-lightgrey)
 ![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen)
 
+<!-- mcp-name: io.github.millennialdreamer/cheaplane -->
+
 Cheaplane is a tiny single-file MCP server (~250 lines, stdlib + `mcp` only) that gives your main agent — e.g. **Claude Code on a Max subscription** — one extra tool: **`delegate`**. Your agent keeps doing the thinking (planning, architecture, final review) and hands *replaceable grunt work* — boilerplate code, formatting, translation, summarizing long docs — to cheap models behind a local [LiteLLM](https://github.com/BerriAI/litellm) proxy (DeepSeek, Kimi, Qwen, …). Think of it as **a cheap intern for your premium agent** — it churns out the boring parts while you keep thinking.
 
 The trick that makes it *safe*: **the delegated calls and your subscription live in physically separate processes and never share credentials.** ([why that matters ⬇️](#billing-isolation-the-whole-point))

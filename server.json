@@ -1,0 +1,50 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.millennialdreamer/cheaplane",
+  "title": "Cheaplane",
+  "description": "Offload grunt work from your premium agent to cheap models — auto-routing and billing isolation.",
+  "version": "0.2.1",
+  "websiteUrl": "https://github.com/millennialdreamer/cheaplane",
+  "repository": {
+    "url": "https://github.com/millennialdreamer/cheaplane",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "cheaplane",
+      "version": "0.2.1",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "DELEGATE_BASE_URL",
+          "description": "OpenAI-compatible endpoint serving the cheap models — usually a local LiteLLM proxy.",
+          "default": "http://localhost:4000"
+        },
+        {
+          "name": "DELEGATE_API_KEY",
+          "description": "Key for that endpoint. A local proxy ignores it; set a real one for a hosted endpoint.",
+          "isSecret": true,
+          "default": "sk-litellm"
+        },
+        {
+          "name": "DELEGATE_TIMEOUT",
+          "description": "Per-call timeout in seconds. Raise it for long documents.",
+          "default": "120"
+        },
+        {
+          "name": "DELEGATE_MODEL_MAP",
+          "description": "JSON remapping the built-in aliases to your proxy's model names, e.g. {\"deepseek\": \"deepseek-v4\"}."
+        },
+        {
+          "name": "DELEGATE_NO_LOG",
+          "description": "Set to 1 to disable the local savings ledger (metadata only, never task content)."
+        }
+      ]
+    }
+  ]
+}
